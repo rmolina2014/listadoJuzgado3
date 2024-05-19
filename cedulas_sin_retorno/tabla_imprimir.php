@@ -1,6 +1,6 @@
 <?php
 require_once "../assets/tcpdf/tcpdf.php";
-include("listado_comisarias.php");
+include("cedulas_sin_retorno.php");
 
 // create new PDF document
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -49,6 +49,8 @@ $pdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'colo
 
 /*** nuevo ***/
 
+
+
 $objeto = new listado_comisarias();
 
 $listado_comisaria_id=(int)$_GET['id'];
@@ -71,11 +73,11 @@ $datos = $objeto->obtenerId($listado_comisaria_id);
   $dias_ES = array("Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo");
   $dias_EN = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
   $nombredia = str_replace($dias_EN, $dias_ES, $dia);
-  $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
+$meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
   $meses_EN = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
   $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
   return $numeroDia." de ".$nombreMes." de ".$anio;
-  }
+}
 
  $dia=fechaCastellano ($fecha);
 
@@ -141,21 +143,18 @@ foreach($datos as $item)
    $persona_id=$item['persona_id'];
    $expediente_id=$item['expedientes_id'];
 
-   /* le saco la bandera a ver como sale 
-    if (($i > 17) and ($Bandera=='1'))
+   if (($i > 17) and ($Bandera=='1'))
    {
     $pdf->AddPage();
     $pdf->SetMargins(10, 40, 40);
     $Bandera='2';  
    }
-   */
  
    $data1=$i.'- '.$persona_nombre.' DNI:'.$persona_dni.' '.$domicilio.' en Autos N° '.$numero_expediente;
 	
-   $pdf->MultiCell(0, 0,$data1."\n", 0,'J', 1, 2, '' ,'', true);
+  $pdf->MultiCell(0, 0,$data1."\n", 0,'J', 1, 2, '' ,'', true);
 
-   $pdf->writeHTML( '<span></span>', true, false, true, false);
-   
+	$pdf->writeHTML( '<span></span>', true, false, true, false);
 }
 
 $nota='                                        Insértese en la Orden del Dia, a quienes no fueren encontrados y notificados de la presente.-';

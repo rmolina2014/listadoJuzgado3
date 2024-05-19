@@ -88,6 +88,25 @@
             </a>
           </li>
 
+         <li class="nav-item">
+            <a href="../cedulas_sin_retorno/datos_imprimir.php" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p style="text-decoration-color: green ;">
+                Cedulas Sin Retorno (desde Comisarias)
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="../listado_secuestros/index.php" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p style="text-decoration-color: green ;">
+                Listado de Secuestro
+              </p>
+            </a>
+          </li>
+
+          
           <li class="nav-item">
             <a href="../salir.php" class="nav-link">
               <i class="nav-icon fas fa-times"></i>

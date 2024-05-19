@@ -1,0 +1,32 @@
+id 23 tipos_escritos( 23-rebeldia comun - 26 rebeldia desconocida -27 28 29 reveldia sin efecto )
+id 2  estados_actuacion
+id 8  libros
+
+
+------------------
+
+personas ---> actuaciones ---->escritos(filtrar pór reveldias)
+
+ver que la reveldia este activa y no prescripta
+
+-----------------------------------------------
+
+SELECT
+*
+FROM
+    `tercero`.`actuaciones`
+    INNER JOIN `tercero`.`personas` 
+        ON (`actuaciones`.`persona` = `personas`.`id`)
+    INNER JOIN `tercero`.`estados_actuacion` 
+        ON (`actuaciones`.`estado` = `estados_actuacion`.`id`)
+    INNER JOIN `tercero`.`escritos` 
+        ON (`escritos`.`actor` = `actuaciones`.`id`)
+    INNER JOIN `tercero`.`tipos_escrito` 
+        ON (`escritos`.`tipo` = `tipos_escrito`.`id`)
+        WHERE tipos_escrito.`id`=23;
+
+--------------------------------------------------
+
+actuaciones --> expedientes
+
+35506629

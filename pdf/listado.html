@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generar PDF con jsPDF</title>
+    <!--    Scripts jsPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
+<!--    Scripts html2canvas-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.js" integrity="sha512-sk0cNQsixYVuaLJRG0a/KRJo9KBkwTDqr+/V94YrifZ6qi8+OO3iJEoHi0LvcTVv1HaBbbIvpx+MCjOuLVnwKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <button id="generarPDF">Generar PDF</button>
+
+    <script>
+
+
+// Crear un nuevo documento PDF con orientación 'portrait' (vertical) y tamaño A4
+const doc = new jsPDF();
+
+// Texto que deseas agregar al PDF
+const texto = `Una de las principales funciones de HTML es dar al texto estructura y significado (también conocido como semántica (en-US)), de forma que un navegador pueda mostrarlo correctamente. Este artículo explica la forma en que se puede usar HTML para estructurar una página de texto añadiendo encabezados y párrafos, enfatizando palabras, creando listas y más.`;
+
+// Dividir el texto en líneas en función de un ancho de línea deseado
+const anchoLinea = 240; // ajusta este valor según tus necesidades
+const lineas = doc.splitTextToSize(texto, anchoLinea);
+
+// Agregar los elementos del listado
+    doc.setFontSize(12);
+
+
+// Agregar cada línea al documento con un salto de línea
+let y = 20; // posición inicial en la página
+lineas.forEach((linea) => {
+  doc.text(20, y, linea);
+  y += 10; // ajusta este valor para controlar el espacio entre líneas
+  if (y >= 290) {
+    // Si la posición llega al final de la página, añadir una nueva página
+    doc.addPage();
+    y = 20; // reiniciar la posición en la nueva página
+  }
+});
+
+// Guardar o mostrar el documento PDF, por ejemplo, descargándolo
+ doc.output('dataurlnewwindow', {filename: 'pdf.pdf'});
+
+
+    </script>
+</body>
+</html>
+
+
+ 
