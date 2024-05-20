@@ -31,7 +31,7 @@ include("../listado_secuestros/listado_secuestros.php");
           <th>Cantidad</th>
           <th>Descripcion</th>
           <th>Ubicacion</th>
-          <th>Seleccionar</th>
+          <th>Imprimir</th>
         </tr>
         <thead>
         <tbody>
@@ -42,15 +42,24 @@ include("../listado_secuestros/listado_secuestros.php");
           ?>
 
             <tr>
+              <input type="hidden" id="<?php echo $item['sucuestro_id']; ?>">
               <td><?php echo $item['autos']; ?></td>
               <td><?php echo $item['objeto']; ?></td>
               <td><?php echo $item['cantidad']; ?></td>
               <td><?php echo $item['descripcion']; ?></td>
               <td><?php echo $item['ubicacion']; ?></td>
               <td>
+                <div style="margin: 0; border=0;">
+<a class="btn btn-primary btn-sm" href="imprimir_restitucion.php?id=<?php echo $item['sucuestro_id']; ?>" target="_blank">RESTITUCIÓN</a>
+
+                <a class="btn btn-primary btn-sm" href="imprimir_donacion.php?id=<?php echo $item['sucuestro_id']; ?>" target="_blank">DONACIÓN</a>
+
+                </div>
                 
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" id="dest<?php echo $item['sucuestro_id']; ?>" name="rad<?php echo $item['sucuestro_id']; ?>" type="radio" value="dest<?php echo $item['sucuestro_id']; ?>">
+
+
+                <!--div class="form-check form-check-inline">
+                  <input class="form-check-input" id="dest<?php echo $item['sucuestro_id']; ?>" name="<?php echo $item['sucuestro_id']; ?>" type="radio" value="dest<?php echo $item['sucuestro_id']; ?>">
                   <label class="form-check-label" for="inlineRadio2">1-DESTRUCCIÓN </label>
                 </div>
                 <div class="form-check form-check-inline">
@@ -61,7 +70,7 @@ include("../listado_secuestros/listado_secuestros.php");
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" id="rest<?php echo $item['sucuestro_id']; ?>" name="rad<?php echo $item['sucuestro_id']; ?>" type="radio" value="rest<?php echo $item['sucuestro_id']; ?>">
                   <label class="form-check-label" for="inlineRadio1">3-RESTITUCIÓN</label>
-                </div>
+                </div-->
 
 
               </td>
