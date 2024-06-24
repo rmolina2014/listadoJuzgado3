@@ -75,8 +75,7 @@ FROM
   {
     $data = [];
 
-    $consulta =
-      "SELECT
+    $consulta ="SELECT
 expedientes.`autos` AS autos,
 expedientes.`caratula` AS caratula,
 expedientes.`fecha_origen` AS fecha_origen,
@@ -93,9 +92,39 @@ FROM
     INNER JOIN `expedientes` 
         ON (`secuestros`.`expediente` = `expedientes`.`id`)
          where secuestros.`id`=$secuestro_id"; //AND expedientes.`autos`=142703; ";
+    $rs = mysqli_query(conexion::obtenerInstancia(), $consulta);
+    if ($rs) {
+      if (mysqli_num_rows($rs) > 0) {
+        while ($fila = mysqli_fetch_assoc($rs)) {
+          $data[] = $fila;
+        }
+      }
+    }
+    return $data;
+  }
 
-    
 
+  public function obtenerDatosSecuestros2($secuestro_id)
+  {
+    $data = [];
+
+    $consulta ="SELECT
+expedientes.`autos` AS autos,
+expedientes.`caratula` AS caratula,
+expedientes.`fecha_origen` AS fecha_origen,
+expedientes.`numero_origen` AS infraccion_numero,
+secuestros.`descripcion` AS descripcion,
+secuestros.`ubicacion` AS ubicacion,
+secuestros.`objeto` AS objeto,
+secuestros.`cantidad` AS cantidad,
+secuestros.`accion` AS accion,
+secuestros.`escrito` AS escrito,
+secuestros.`id` AS sucuestro_id
+FROM
+`secuestros`
+    INNER JOIN `expedientes` 
+        ON (`secuestros`.`expediente` = `expedientes`.`id`)
+         where secuestros.`id`=$secuestro_id"; //AND expedientes.`autos`=142703; ";
     $rs = mysqli_query(conexion::obtenerInstancia(), $consulta);
     if ($rs) {
       if (mysqli_num_rows($rs) > 0) {

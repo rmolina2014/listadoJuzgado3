@@ -105,15 +105,10 @@ print_r($list);
 var_dump($list);
 */
 
-
-
 foreach ($list as $item) {
     //echo $item . "\n";
-
     $datos = $objeto->obtenerDatosSecuestros($item);
-
     foreach ($datos as $item) {
-
         $ubicacion = $item['ubicacion'];
     }
 }
@@ -131,24 +126,25 @@ $pdf->writeHTML('<span></span>', true, false, true, false);
 
 $pdf->setCellHeightRatio(2.5);
 
-
 $pdf->writeHTML('<span></span>', true, false, true, false);
 
 //$data1 = $i . '- ' . $persona_nombre . ' DNI:' . $persona_dni . ' ' . $domicilio . ' en Autos N° ' . $numero_expediente;
 
 $pdf->MultiCell(0, 0, "Tengo el agrado de dirigirme a usted para que proceda a la Donacion de los siguientes elementos :" . "\n", 0, 'J', 1, 2, '', '', true);
 
-foreach ($list as $item) {
+foreach ($list as $item2) {
     // echo $item . "\n";
-
-    $datos = $objeto->obtenerDatosSecuestros($item);
-    /*echo "<pre>";
+    $item2=(int) $item2;
+    $objeto = new listado_secuestros();
+    $datos = $objeto->obtenerDatosSecuestros2($item2);
+/*
+    echo "<pre>";
     print_r($datos);
     var_dump($datos);
     echo "</pre>";
+    exit;
+  */  
 
-
-    */
     foreach ($datos as $item) {
         $autos = $item['autos'];
         $caratula = $item['caratula'];
@@ -159,10 +155,13 @@ foreach ($list as $item) {
         // $articulo = $item['articulo'];
     }
 
-    $pdf->writeHTML('- ' . $objeto . ' Autos N° ' . $autos . ' C/' . $caratula, true, false, true, false);
+    //exit;
+
+    $pdf->writeHTML('- ' . $objeto .' '.$descripcion . ' en  Autos N° ' . $autos . ' C/' . $caratula, true, false, true, false);
 }
 
-exit;
+//exit;
+
 $pdf->writeHTML('<span></span>', true, false, true, false);
 
 

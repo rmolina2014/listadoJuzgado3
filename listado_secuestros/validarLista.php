@@ -35,9 +35,9 @@ include("../listado_secuestros/listado_secuestros.php");
                 $listados = $objeto->obtenerDatosSecuestros($item);
                 foreach ($listados as $item) {
             ?>
-                    <li class="list-group-item">
-                        <?php echo $item['autos'] . '-' . $item['caratula'] . '-' . $item['objeto']; ?>
-                    </li>
+            <li class="list-group-item">
+                <?php echo $item['autos'] . '-' . $item['caratula'] . '-' . $item['objeto'].' - '.$item['descripcion']; ?>
+            </li>
             <?php
                 }
             }
@@ -46,8 +46,8 @@ include("../listado_secuestros/listado_secuestros.php");
 
         <h5>Acciones</h5>
         <div class="d-grid gap-2 d-md-block">
-            <form action="imprimir_donacion.php" method="POST">
-                <input type="hidden" name="donacion" id="donacion" >
+            <form action="imprimir_donacion.php" method="POST" target="_blank">
+                <input type="hidden" name="donacion" id="donacion">
                 <input type="submit" value="Donacion">
             </form>
 

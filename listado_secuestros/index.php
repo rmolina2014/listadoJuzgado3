@@ -20,13 +20,15 @@ include("../listado_secuestros/listado_secuestros.php");
 
   <!-- Main content -->
   <section class="content">
-
-
+    <br>
+    <div id="formulario" >
+    
     <form action="validarLista.php" method="POST">
       <input type="text" name="caja_valor" id="caja_valor">
       <input type="submit" value="Seleccionar Elementos" class="btn btn-primary">
     </form>
-<br>
+    </div>
+    <br>
 
     <!--p> <a class="btn btn-primary" href="nuevo.php">Adicionar Nueva Nota </a> </p-->
     <!--button type="button" class="btn btn-primary" onclick="sendToPHP()">Seleccionar</button-->
@@ -35,8 +37,8 @@ include("../listado_secuestros/listado_secuestros.php");
         <tr>
           <th>Autos</th>
           <th>Caratula</th>
-          <th>Objetos</th>
           <th>Cantidad</th>
+          <th>Objetos</th>
           <th>Descripcion</th>
           <th>Ubicacion</th>
           <th>Imprimir</th>
@@ -53,8 +55,8 @@ include("../listado_secuestros/listado_secuestros.php");
               <input type="hidden" id="<?php echo $item['sucuestro_id']; ?>">
               <td><?php echo $item['autos']; ?></td>
               <td><?php echo $item['caratula']; ?></td>
-              <td><?php echo $item['objeto']; ?></td>
               <td><?php echo $item['cantidad']; ?></td>
+              <td><?php echo $item['objeto']; ?></td>
               <td><?php echo $item['descripcion']; ?></td>
               <td><?php echo $item['ubicacion']; ?></td>
               <td>
@@ -89,7 +91,10 @@ include("../listado_secuestros/listado_secuestros.php");
             </tr>
           <?php
           }
-          ?>
+         ?>
+        
+
+        
         </tbody>
     </table>
   </section>
