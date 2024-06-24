@@ -11,7 +11,7 @@ class Conexion{
 			self::$instancia = new Conexion();
 			//self::$objCon = mysqli_connect("localhost","jose9cd_2018","*sj2020$","jose9cd_2018");
 			// mysqli_connect("localhost"," nombre usuario","clve de la base de datos","nombre de la base de datos");
-			self::$objCon = mysqli_connect("localhost","root","","tercero2024");
+			self::$objCon = mysqli_connect("localhost","root","12345678","tercero2024");
 			//8Nua;Krf&v77
 		}
 		return self::$objCon;

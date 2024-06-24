@@ -2,21 +2,52 @@
 require_once "../assets/tcpdf/tcpdf.php";
 include("listado_secuestros.php");
 
+// create new PDF document
+$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
-/*** nuevo ***/
+// set document information
+$pdf->SetCreator(PDF_CREATOR);
+$pdf->SetAuthor('Nicola Asuni');
+$pdf->SetTitle('Nota');
+$pdf->SetSubject('TCPDF Tutorial');
+$pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 
-$objeto = new listado_secuestros();
+// remove default header/footer
+$pdf->setPrintHeader(false);
+$pdf->setPrintFooter(false);
 
-$listado_comisaria_id = (int)$_GET['id'];
-/*
-$datos = $objeto->obtenerDatosDonacion($listado_comisaria_id);
-foreach ($datos as $item) {
-    $comisaria = $item['destino'];
-    $fecha = $item['fecha'];
+// set default monospaced font
+$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+
+// set margins antes
+//$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+
+// hoy 
+$pdf->SetMargins(40, 40, 10);
+
+// set auto page breaks
+$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+
+// set image scale factor
+$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+// set some language-dependent strings (optional)
+if (@file_exists(dirname(__FILE__) . '/lang/eng.php')) {
+    require_once(dirname(__FILE__) . '/lang/eng.php');
+    $pdf->setLanguageArray($l);
 }
-*/
+
+// ---------------------------------------------------------
+$pdf->SetFont('dejavusans', '', 10);
+
+// add a page
+$pdf->AddPage();
+
+// set text shadow effect
+$pdf->setTextShadow(array('enabled' => true, 'depth_w' => 0.2, 'depth_h' => 0.2, 'color' => array(196, 196, 196), 'opacity' => 1, 'blend_mode' => 'Normal'));
+
 /**fecha**/
-/*
+$fecha = date("Y-m-d");
 function fechaCastellano($fecha)
 {
     $fecha = substr($fecha, 0, 10);
@@ -35,120 +66,119 @@ function fechaCastellano($fecha)
 
 $dia = fechaCastellano($fecha);
 
-/** datos****/
+$tipo = '<strong><u>OFICIO</u></strong>';
+$pdf->writeHTML($tipo, true, false, true, false, "C");
 
-?>
+//$pdf->Cell(0, 15, ' <strong>OFICIO</strong> ', 0, false, 'C', 0, '', 0, false, 'M', 'M');
 
-<!--DOCTYPE html>
-<html lang="es">
+$pdf->writeHTML('<span></span>', true, false, true, false);
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oficio Judicial</title>
+$pdf->writeHTML('<span></span>', true, false, true, false);
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-</head>
+$encabezado = '                              San Juan, ' . $dia . '.';
 
-<body>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-12">
-                <h1>Oficio Judicial</h1>
-            </div>
-        </div>
+$pdf->writeHTML($encabezado, true, false, true, false, "R");
 
-        <div class="row mt-3">
-            <div class="col-12">
-                <p>San Juan, 13 de Agosto de 2019.-</p>
-            </div>
-        </div>
+$pdf->writeHTML('<span></span>', true, false, true, false);
 
-        <div class="row mt-3">
-            <div class="col-12">
-                <p>SEÑOR DIRECTOR<br>
-                    DIRECCIÓN DE DESARROLLO PECUARIO<br>
-                    SERV. VETERINARIO DE INSPECCIÓN SANITARIA<br>
-                    DE LA PROVINCIA DE SAN JUAN:<br>
-                    S------------------/----------------------D:<br>
-                </p>
-            </div>
-        </div>
+//$destinatario='AL SR. JEFE DE POLICIA DE LA PROVINCIA DE SAN JUAN '.$comisaria.'.';
+$destinatario = 'SEÑOR JEFE DE ';
 
-        <div class="row mt-3">
-            <div class="col-12">
-                <p>Tengo el agrado de dirigirme a usted en Autos Nº120242-C c/VEA (BASE DE TRANSFERENCIA S.M 419) CENCOSUD S.A.. Por Inf. a ART. 139 de LEY LP-941-R - Código de Faltas, Fecha 31/07/2019, Acta Nº 102250 y 102588, que se tramitan por ante este Juzgado de Faltas de Tercera Nominación, a fin de solicitarle proceda al transporte para su DONACIÓN de los elementos que se hallan decomisados e intervenidos en el freezer del local comercial sito en AVDA ESPAÑA 1048 NORTE – CAPITAL (BASE DE TRANSFERENCIA SM 419 – VEA CENCOSUD S.A.) a la institución “PARQUE FAUNISTICO–UBICADO EN EL DPTO DE RIVADAVIA”, tales son la cantidad de: 08 MEDIAS RESES DE CARNE VACUNA cuyos precintos de S.V.I.S. son los siguientes: 003320, 003360, 003456, 003458, 003457, 003459, 003460, 003464.- Fdo. Abdo. Enrique G. Mattar- Juez de Faltas- Abda. Adriana Corral de Lobos- Secretaria”.-</p>
-            </div>
-        </div>
+$pdf->writeHTML($destinatario, true, false, true, false);
 
-        <div class="row mt-3">
-            <div class="col-12">
-                <p>Para llevar a cabo esta medida se deberá labrar acta con noticia al Juzgado actuante.-</p>
-            </div>
-        </div>
+$pdf->writeHTML('<span></span>', true, false, true, false);
 
-        <div class="row mt-3">
-            <div class="col-12">
-                <p>Sin más le saludo atte.-</p>
-            </div>
-        </div>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-</body>
+/*** buscar los datos ***/
 
-</html-->
+$objeto = new listado_secuestros();
 
-<!DOCTYPE html>
-<html lang="es">
+$list = json_decode($_POST['donacion']);
+/*
+echo "<pre>";
+print_r($_POST['donacion']);
+var_dump($_POST['donacion']);
+echo "</pre>";
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oficio</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .container {
-            max-width: 800px;
-            margin-top: 20px;
-        }
+echo "<pre>";
+print_r($list);
+var_dump($list);
+*/
 
-        .text-center {
-            text-align: center;
-        }
 
-        .signature {
-            font-size: 14px;
-            color: #666;
-        }
-    </style>
-</head>
 
-<body>
+foreach ($list as $item) {
+    //echo $item . "\n";
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <h1 class="display-6">OFICIO</h1>
-                <p class="lead">San Juan, 13 de Agosto de 2019.</p>
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-md-12">
-                <p><strong>SEÑOR DIRECTOR</strong></p>
-                <p>DIRECCIÓN DE DESARROLLO PECUARIO</p>
-                <p>SERV. VETERINARIO DE INSPECCIÓN SANITARIA DE LA PROVINCIA DE SAN JUAN:</p>
-                <p>Tengo el agrado de dirigirme a usted en Autos Nº120242-C c/VEA (BASE DE TRANSFERENCIA S.M 419) CENCOSUD S.A.. Por Inf. a ART. 139 de LEY LP-941-R - Código de Faltas, Fecha 31/07/2019, Acta Nº 102250 y 102588, que se tramitan por ante este Juzgado de Faltas de Tercera Nominación, a fin de solicitarle proceda al transporte para su DONACIÓN de los elementos que se hallan decomisados e intervenidos en el freezer del local comercial sito en AVDA ESPAÑA 1048 NORTE – CAPITAL (BASE DE TRANSFERENCIA SM 419 – VEA CENCOSUD S.A.) a la institución “PARQUE FAUNÍSTICO–UBICADO EN EL DPTO DE RIVADAVIA”, tales son la cantidad de: 08 MEDIAS RESES DE CARNE VACUNA cuyos precintos de S.V.I.S. son los siguientes: 003320, 003360, 003456, 003458, 003457, 003459, 003460, 003464.- Fdo. Abdo. Enrique G. Mattar- Juez de Faltas- Abda. Adriana Corral de Lobos- Secretaria”.</p>
-                <p>Para llevar a cabo esta medida se deberá labrar acta con noticia al Juzgado actuante.</p>
-                <p class="text-end signature">Sin más le saludo atte.</p>
-            </div>
-        </div>
-    </div>
+    $datos = $objeto->obtenerDatosSecuestros($item);
 
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    foreach ($datos as $item) {
 
-</body>
+        $ubicacion = $item['ubicacion'];
+    }
+}
 
-</html>
+
+/** obtener ubicacion */
+
+$destinatario2 = $ubicacion; //'POLICIA DE LA PROVINCIA DE SAN JUAN';
+
+$pdf->writeHTML($destinatario2, true, false, true, false);
+
+$pdf->writeHTML('S.___________/___________D.', true, false, true, false);
+$pdf->writeHTML('<span></span>', true, false, true, false);
+$pdf->writeHTML('<span></span>', true, false, true, false);
+
+$pdf->setCellHeightRatio(2.5);
+
+
+$pdf->writeHTML('<span></span>', true, false, true, false);
+
+//$data1 = $i . '- ' . $persona_nombre . ' DNI:' . $persona_dni . ' ' . $domicilio . ' en Autos N° ' . $numero_expediente;
+
+$pdf->MultiCell(0, 0, "Tengo el agrado de dirigirme a usted para que proceda a la Donacion de los siguientes elementos :" . "\n", 0, 'J', 1, 2, '', '', true);
+
+foreach ($list as $item) {
+    // echo $item . "\n";
+
+    $datos = $objeto->obtenerDatosSecuestros($item);
+    /*echo "<pre>";
+    print_r($datos);
+    var_dump($datos);
+    echo "</pre>";
+
+
+    */
+    foreach ($datos as $item) {
+        $autos = $item['autos'];
+        $caratula = $item['caratula'];
+        $descripcion = $item['descripcion'];
+        $ubicacion = $item['ubicacion'];
+        $objeto = $item['objeto'];
+        $cantidad = $item['cantidad'];
+        // $articulo = $item['articulo'];
+    }
+
+    $pdf->writeHTML('- ' . $objeto . ' Autos N° ' . $autos . ' C/' . $caratula, true, false, true, false);
+}
+
+exit;
+$pdf->writeHTML('<span></span>', true, false, true, false);
+
+
+$nota = '                                        Insértese en la Orden del Dia, a quienes no fueren encontrados y notificados de la presente.-';
+
+$pdf->MultiCell(0, 0, '' . $nota . "\n", 0, 'J', 1, 2, '', '', true);
+
+$pdf->writeHTML('<span></span>', true, false, true, false);
+
+$nota1 = '                                        Sin otro particular, saludo a Ud. atentamente.-';
+
+$pdf->MultiCell(0, 0, '' . $nota1 . "\n", 0, 'J', 1, 2, '', '', true);
+
+$pdf->writeHTML('<span></span>', true, false, true, false);
+
+// ---------- Actualizar el estado-----------------------------------------------
+//$datos = $objeto->actualizarEstado($listado_comisaria_id, "Impreso");
+//Close and output PDF document
+$pdf->Output('nota.pdf', 'I');
