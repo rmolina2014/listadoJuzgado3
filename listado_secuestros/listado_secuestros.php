@@ -75,7 +75,7 @@ FROM
   {
     $data = [];
 
-    $consulta ="SELECT
+    $consulta = "SELECT
 expedientes.`autos` AS autos,
 expedientes.`caratula` AS caratula,
 expedientes.`fecha_origen` AS fecha_origen,
@@ -86,12 +86,14 @@ secuestros.`objeto` AS objeto,
 secuestros.`cantidad` AS cantidad,
 secuestros.`accion` AS accion,
 secuestros.`escrito` AS escrito,
-secuestros.`id` AS sucuestro_id
+secuestros.`id` AS secuestro_id
 FROM
 `secuestros`
     INNER JOIN `expedientes` 
         ON (`secuestros`.`expediente` = `expedientes`.`id`)
-         where secuestros.`id`=$secuestro_id"; //AND expedientes.`autos`=142703; ";
+         where secuestros.`id`=" . $secuestro_id;
+
+    //AND expedientes.`autos`=142703; ";
     $rs = mysqli_query(conexion::obtenerInstancia(), $consulta);
     if ($rs) {
       if (mysqli_num_rows($rs) > 0) {
@@ -108,7 +110,7 @@ FROM
   {
     $data = [];
 
-    $consulta ="SELECT
+    $consulta = "SELECT
 expedientes.`autos` AS autos,
 expedientes.`caratula` AS caratula,
 expedientes.`fecha_origen` AS fecha_origen,

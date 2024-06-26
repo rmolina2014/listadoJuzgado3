@@ -81,38 +81,23 @@ $pdf->writeHTML($encabezado, true, false, true, false, "R");
 
 $pdf->writeHTML('<span></span>', true, false, true, false);
 
-//$destinatario='AL SR. JEFE DE POLICIA DE LA PROVINCIA DE SAN JUAN '.$comisaria.'.';
 $destinatario = 'SEÑOR JEFE DE ';
 
 $pdf->writeHTML($destinatario, true, false, true, false);
 
 $pdf->writeHTML('<span></span>', true, false, true, false);
 
-
 /*** buscar los datos ***/
 
 $objeto = new listado_secuestros();
 
 $list = json_decode($_POST['donacion']);
-/*
-echo "<pre>";
-print_r($_POST['donacion']);
-var_dump($_POST['donacion']);
-echo "</pre>";
 
-echo "<pre>";
-print_r($list);
-var_dump($list);
-*/
+// recorrer el json
 
 foreach ($list as $item) {
-    //echo $item . "\n";
-    $datos = $objeto->obtenerDatosSecuestros($item);
-    foreach ($datos as $item) {
-        $ubicacion = $item['ubicacion'];
-    }
+    $ubicacion = $item->ubicacion;
 }
-
 
 /** obtener ubicacion */
 
@@ -128,23 +113,14 @@ $pdf->setCellHeightRatio(2.5);
 
 $pdf->writeHTML('<span></span>', true, false, true, false);
 
-//$data1 = $i . '- ' . $persona_nombre . ' DNI:' . $persona_dni . ' ' . $domicilio . ' en Autos N° ' . $numero_expediente;
+$nota = '                                        Me dirigo a Ud.,con el fin de comunicarle se ha dictado la siguiente providencia:San Juan,' . $dia . ': I) Oficiese a Servicio VETERINARIO para que proceda a la donacion de los siguientes elementos secuestrados:';
 
-$pdf->MultiCell(0, 0, "Tengo el agrado de dirigirme a usted para que proceda a la Donacion de los siguientes elementos :" . "\n", 0, 'J', 1, 2, '', '', true);
+$pdf->MultiCell(0, 0," ".$nota . "\n", 0, 'J', 1, 2, '', '', true);
 
 foreach ($list as $item2) {
-    // echo $item . "\n";
-    $item2=(int) $item2;
+    $secuestro_id = $item2->secuestro_id;
     $objeto = new listado_secuestros();
-    $datos = $objeto->obtenerDatosSecuestros2($item2);
-/*
-    echo "<pre>";
-    print_r($datos);
-    var_dump($datos);
-    echo "</pre>";
-    exit;
-  */  
-
+    $datos = $objeto->obtenerDatosSecuestros2($secuestro_id);
     foreach ($datos as $item) {
         $autos = $item['autos'];
         $caratula = $item['caratula'];
@@ -155,23 +131,17 @@ foreach ($list as $item2) {
         // $articulo = $item['articulo'];
     }
 
-    //exit;
-
-    $pdf->writeHTML('- ' . $objeto .' '.$descripcion . ' en  Autos N° ' . $autos . ' C/' . $caratula, true, false, true, false);
+    $pdf->writeHTML('- ' . $objeto . ' ' . $descripcion . ' en  Autos N° ' . $autos . ' C/' . $caratula, true, false, true, false);
 }
 
-//exit;
-
-$pdf->writeHTML('<span></span>', true, false, true, false);
-
-
-$nota = '                                        Insértese en la Orden del Dia, a quienes no fueren encontrados y notificados de la presente.-';
+$nota = '                                        II)Para llevar a cabo esta medida, deberá labrarse acta con noticia al Juzgado actuante.-';
 
 $pdf->MultiCell(0, 0, '' . $nota . "\n", 0, 'J', 1, 2, '', '', true);
+$pdf->writeHTML('<span></span>', true, false, true, false);
 
 $pdf->writeHTML('<span></span>', true, false, true, false);
 
-$nota1 = '                                        Sin otro particular, saludo a Ud. atentamente.-';
+$nota1 = '                                        Sin más,le saludo a Ud. atentamente.-';
 
 $pdf->MultiCell(0, 0, '' . $nota1 . "\n", 0, 'J', 1, 2, '', '', true);
 

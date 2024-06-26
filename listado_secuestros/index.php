@@ -21,12 +21,12 @@ include("../listado_secuestros/listado_secuestros.php");
   <!-- Main content -->
   <section class="content">
     <br>
-    <div id="formulario">
-
-      <form action="validarLista.php" method="POST">
-        <input type="text" name="caja_valor" id="caja_valor">
-        <input type="submit" value="Seleccionar Elementos" class="btn btn-primary">
-      </form>
+    <div id="formulario" >
+    
+    <form action="agregar_secuestros.php" method="POST">
+      <input type="text" name="caja_valor" id="caja_valor">
+      <input type="submit" value="Seleccionar Elementos" class="btn btn-primary">
+    </form>
     </div>
     <br>
 
@@ -50,7 +50,6 @@ include("../listado_secuestros/listado_secuestros.php");
           $listados = $objeto->lista();
           foreach ($listados as $item) {
           ?>
-
             <tr>
               <input type="hidden" id="<?php echo $item['sucuestro_id']; ?>">
               <td><?php echo $item['autos']; ?></td>
@@ -60,32 +59,13 @@ include("../listado_secuestros/listado_secuestros.php");
               <td><?php echo $item['descripcion']; ?></td>
               <td><?php echo $item['ubicacion']; ?></td>
               <td>
-                <!--div style="margin: 0; border:0;">
-                  <a class="btn btn-primary btn-sm" href="imprimir.php?id=<?php echo $item['sucuestro_id']; ?>">prueba STITUCIÓN</a>
-                  <a class="btn btn-primary btn-sm" href="imprimir_restitucion.php?id=<?php echo $item['sucuestro_id']; ?>" target="_blank">RESTITUCIÓN</a>
-                  <a class="btn btn-primary btn-sm" href="imprimir_donacion.php?id=<?php echo $item['sucuestro_id']; ?>" target="_blank">DONACIÓN</a>
-                </div-->
-
-                <!--div class="form-check form-check-inline">
-                  <input class="form-check-input" id="dest<?php echo $item['sucuestro_id']; ?>" name="<?php echo $item['sucuestro_id']; ?>" type="radio" value="dest<?php echo $item['sucuestro_id']; ?>">
-                  <label class="form-check-label" for="inlineRadio2">1-DESTRUCCIÓN </label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" id="dona<?php echo $item['sucuestro_id']; ?>" name="rad<?php echo $item['sucuestro_id']; ?>" type="radio" value="dona<?php echo $item['sucuestro_id']; ?>">
-                  <label class="form-check-label" for="inlineRadio2">2-DONACIÓN </label>
-                </div>
-
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" id="rest<?php echo $item['sucuestro_id']; ?>" name="rad<?php echo $item['sucuestro_id']; ?>" type="radio" value="rest<?php echo $item['sucuestro_id']; ?>">
-                  <label class="form-check-label" for="inlineRadio1">3-RESTITUCIÓN</label>
-                </div-->
-
                 <input type="checkbox" onclick="addToList(<?php echo $item['sucuestro_id']; ?>)" id="checkbox<?php echo $item['sucuestro_id']; ?>" value="valor1">
               </td>
             </tr>
           <?php
           }
-          ?>
+         ?>
+    
         </tbody>
     </table>
   </section>
@@ -94,6 +74,7 @@ include("../listado_secuestros/listado_secuestros.php");
 <!-- /.content-wrapper -->
 
 <script type="text/javascript">
+ 
   let list = [];
 
   function addToList(value) {
@@ -108,17 +89,7 @@ include("../listado_secuestros/listado_secuestros.php");
     console.log(list);
   }
 
-  function sendToPHP() {
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "validarLista.php", true);
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function() {
-      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-        console.log(this.responseText);
-      }
-    };
-    xhr.send("list=" + JSON.stringify(list));
-  }
+  
 </script>
 <?php
 require '../footer.html';
