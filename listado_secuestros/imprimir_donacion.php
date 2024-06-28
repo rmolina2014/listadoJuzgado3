@@ -128,10 +128,10 @@ foreach ($list as $item2) {
         $ubicacion = $item['ubicacion'];
         $objeto = $item['objeto'];
         $cantidad = $item['cantidad'];
-        // $articulo = $item['articulo'];
+        $acta_infraccion = $item['infraccion_numero'];
     }
 
-    $pdf->writeHTML('- ' . $objeto . ' ' . $descripcion . ' en  Autos N° ' . $autos . ' C/' . $caratula, true, false, true, false);
+    $pdf->writeHTML('En Acta de Infracción N° : '.$acta_infraccion.' en  Autos N° ' . $autos . ' C/' . $caratula.' elementos '.$cantidad.' '.$objeto.'-'.$descripcion.'-', true, false, true, false);
 }
 
 $nota = '                                        II)Para llevar a cabo esta medida, deberá labrarse acta con noticia al Juzgado actuante.-';

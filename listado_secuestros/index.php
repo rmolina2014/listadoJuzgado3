@@ -24,8 +24,8 @@ include("../listado_secuestros/listado_secuestros.php");
     <div id="formulario" >
     
     <form action="agregar_secuestros.php" method="POST">
-      <input type="text" name="caja_valor" id="caja_valor">
-      <input type="submit" value="Seleccionar Elementos" class="btn btn-primary">
+      <input type="hidden" id="caja_valor" name="caja_valor" id="caja_valor">
+      <button type="submit" class="btn btn-primary" id="enviar"> Seleccionar Elementos </button>
     </form>
     </div>
     <br>
@@ -77,18 +77,34 @@ include("../listado_secuestros/listado_secuestros.php");
  
   let list = [];
 
+  const boton=document.getElementById("enviar"); 
+  boton.disabled = true;
+
+  //$('#enviar').attr('disabled', false);
+   
+
+  // funcion para habilitar o desabilitar un boton si la lista no esta vacia
+  function habilitarBoton() {
+    
+    if (list.length > 0) {
+      boton.disabled = false;
+    } else {
+      boton.disabled =true;
+    }
+  }
+   
   function addToList(value) {
     if (list.includes(value)) {
       list = list.filter(item => item !== value);
       document.getElementById("caja_valor").value = JSON.stringify(list);
+      habilitarBoton();
     } else {
       list.push(value);
       document.getElementById("caja_valor").value = JSON.stringify(list);
-
+      habilitarBoton();
     }
     console.log(list);
   }
-
   
 </script>
 <?php

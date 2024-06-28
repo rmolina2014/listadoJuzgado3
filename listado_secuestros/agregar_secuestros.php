@@ -22,27 +22,43 @@ $listado_elementos = $_POST['caja_valor'];
     <!-- Main content -->
     <section class="content">
         <h5>Elementos de Secuestros</h5>
-
-        <div id="tabla-datos"></div>
-        <br>
-        <br>
-        <br>
-
         <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal" onclick="location.href='index.php';"><i class="fa fa-times"></i> Cancelar</button>
-
-                    <button type="button" onclick="imprimirpdf();" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Guardar e Imprimir</button>
-                   
-                    <form action="imprimir_donacion.php" method="POST" target="_blank">
-                <input type="hidden" name="donacion" id="donacion">
-                <input type="submit" value="Donacion">
-            </form>
-
-                </div>
+            <div class="col-md-12">
+                <div id="tabla-datos"></div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <form action="imprimir_donacion.php" method="POST" target="_blank">
+                    <input type="hidden" name="donacion" id="donacion">
+                    <input type="submit" class="btn btn-primary pull-right" value="Donacion">
+                </form>
+
+            </div>
+
+            <div class="col-md-3">
+                <form action="imprimir_donacion.php" method="POST" target="_blank">
+                    <input type="hidden" name="donacion" id="donacion">
+                    <input type="submit" class="btn btn-primary pull-right" value="Destrucción">
+                </form>
+            </div>
+
+            <div class="col-md-3">
+                <form action="imprimir_donacion.php" method="POST" target="_blank">
+                    <input type="hidden" name="donacion" id="donacion">
+                    <input type="submit" class="btn btn-primary pull-right" value="Restitución">
+                </form>
+            </div>
+
+            <div class="col-md-3 d-flex ">
+                <button type="button" class="btn btn-danger align-items-center" data-dismiss="modal" onclick="location.href='index.php';"><i class="fa fa-times"></i> Cancelar</button>
+
+                <!--button type="button" onclick="imprimirpdf();" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Guardar e Imprimir</button-->
+
+            </div>
+        </div>
+</div>
 </div>
 </div>
 
@@ -79,9 +95,11 @@ $listado_elementos = $_POST['caja_valor'];
         html += '<tr>';
         html += '<th>Auto</th>';
         html += '<th>Caratula</th>';
+        html += '<th>Acta Infracción</th>';
         html += '<th>Objeto</th>';
         html += '<th>Descripción</th>';
-        html += '<th>Ubicacion</th>';
+        html += '<th>Ubicación</th>';
+        html += '<th></th>';
         html += '</tr>';
         html += '</thead>';
         html += '<tbody>';
@@ -89,12 +107,14 @@ $listado_elementos = $_POST['caja_valor'];
             html += '<tr>';
             html += '<td>' + datos[i].autos + '</td>';
             html += '<td>' + datos[i].caratula + '</td>';
+            html += '<td>' + datos[i].acta_infraccion + '</td>';
             html += '<td>' + datos[i].objeto + '</td>';
             html += '<td>' + datos[i].descripcion + '</td>';
             html += '<td>' + datos[i].ubicacion + '</td>';
             html += '<td><button type="button" class="btn btn-danger" onclick="eliminar(' + i + ');">Borrar</button> </td>';
             html += '</tr>';
         }
+        html += '<tr><td colspan="7">Fin Listado </td></tr>';
         html += '</tbody>';
         html += '</table>';
 

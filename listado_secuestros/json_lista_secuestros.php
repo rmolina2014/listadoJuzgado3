@@ -20,6 +20,7 @@ foreach ($list as $item) {
         "descripcion" => $item['descripcion'],
         "secuestro_id" => $item['secuestro_id'],
         "ubicacion" => $item['ubicacion'],
+        "acta_infraccion"=>$item['infraccion_numero'],
        
     );
     array_push($datos, $fila);
