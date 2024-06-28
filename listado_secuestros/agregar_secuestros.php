@@ -31,36 +31,32 @@ $listado_elementos = $_POST['caja_valor'];
         <div class="row">
             <div class="col-md-3">
                 <form action="imprimir_donacion.php" method="POST" target="_blank">
+
+                    <label for="nombre">Nombre del destinatario:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                    <label for="apellido">tipo de secuestro donacion:</label>
+                    <select name="tipo_donacion" id="">
+                        <option value="Donacion">Donacion</option>
+                        <option value="Destrucción">Destrucción</option>
+                        <option value="Restitución">Restitución</option>
+                    </select>
+
                     <input type="hidden" name="donacion" id="donacion">
-                    <input type="submit" class="btn btn-primary pull-right" value="Donacion">
+                    <input type="submit" class="btn btn-primary pull-right" value="Imprimir">
                 </form>
 
             </div>
 
-            <div class="col-md-3">
-                <form action="imprimir_donacion.php" method="POST" target="_blank">
-                    <input type="hidden" name="donacion" id="donacion">
-                    <input type="submit" class="btn btn-primary pull-right" value="Destrucción">
-                </form>
-            </div>
-
-            <div class="col-md-3">
-                <form action="imprimir_donacion.php" method="POST" target="_blank">
-                    <input type="hidden" name="donacion" id="donacion">
-                    <input type="submit" class="btn btn-primary pull-right" value="Restitución">
-                </form>
-            </div>
-
-            <div class="col-md-3 d-flex ">
-                <button type="button" class="btn btn-danger align-items-center" data-dismiss="modal" onclick="location.href='index.php';"><i class="fa fa-times"></i> Cancelar</button>
+            
+            <button type="button" class="btn btn-danger align-items-center" data-dismiss="modal" onclick="location.href='index.php';"><i class="fa fa-times"></i> Cancelar</button>
 
                 <!--button type="button" onclick="imprimirpdf();" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Guardar e Imprimir</button-->
 
             </div>
         </div>
-</div>
-</div>
-</div>
+
+
+</section>
 
 <script type="text/javascript">
     var listaNumeros = <?php echo $listado_elementos; ?>;

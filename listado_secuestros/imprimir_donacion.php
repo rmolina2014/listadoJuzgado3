@@ -81,7 +81,7 @@ $pdf->writeHTML($encabezado, true, false, true, false, "R");
 
 $pdf->writeHTML('<span></span>', true, false, true, false);
 
-$destinatario = 'SEÑOR JEFE DE ';
+$destinatario = 'SEÑOR ';
 
 $pdf->writeHTML($destinatario, true, false, true, false);
 
@@ -103,7 +103,7 @@ foreach ($list as $item) {
 
 $destinatario2 = $ubicacion; //'POLICIA DE LA PROVINCIA DE SAN JUAN';
 
-$pdf->writeHTML($destinatario2, true, false, true, false);
+$pdf->writeHTML($destinatario, true, false, true, false);
 
 $pdf->writeHTML('S.___________/___________D.', true, false, true, false);
 $pdf->writeHTML('<span></span>', true, false, true, false);
@@ -113,7 +113,7 @@ $pdf->setCellHeightRatio(2.5);
 
 $pdf->writeHTML('<span></span>', true, false, true, false);
 
-$nota = '                                        Me dirigo a Ud.,con el fin de comunicarle se ha dictado la siguiente providencia:San Juan,' . $dia . ': I) Oficiese a Servicio VETERINARIO para que proceda a la donacion de los siguientes elementos secuestrados:';
+$nota = '                                        Me dirigo a Ud.,con el fin de comunicarle se ha dictado la siguiente providencia:"San Juan,' . $dia . ': I) Oficiese a '. $destinatario.' para que proceda a la donacion de los siguientes elementos secuestrados:';
 
 $pdf->MultiCell(0, 0," ".$nota . "\n", 0, 'J', 1, 2, '', '', true);
 
@@ -134,7 +134,7 @@ foreach ($list as $item2) {
     $pdf->writeHTML('En Acta de Infracción N° : '.$acta_infraccion.' en  Autos N° ' . $autos . ' C/' . $caratula.' elementos '.$cantidad.' '.$objeto.'-'.$descripcion.'-', true, false, true, false);
 }
 
-$nota = '                                        II)Para llevar a cabo esta medida, deberá labrarse acta con noticia al Juzgado actuante.-';
+$nota = '                                        II)Para llevar a cabo esta medida, deberá labrarse acta con noticia al Juzgado actuante".-';
 
 $pdf->MultiCell(0, 0, '' . $nota . "\n", 0, 'J', 1, 2, '', '', true);
 $pdf->writeHTML('<span></span>', true, false, true, false);

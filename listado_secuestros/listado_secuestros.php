@@ -76,20 +76,20 @@ FROM
     $data = [];
 
     $consulta = "SELECT
-expedientes.`autos` AS autos,
-expedientes.`caratula` AS caratula,
-expedientes.`fecha_origen` AS fecha_origen,
-expedientes.`numero_origen` AS infraccion_numero,
-secuestros.`descripcion` AS descripcion,
-secuestros.`ubicacion` AS ubicacion,
-secuestros.`objeto` AS objeto,
-secuestros.`cantidad` AS cantidad,
-secuestros.`accion` AS accion,
-secuestros.`escrito` AS escrito,
-secuestros.`id` AS secuestro_id
-FROM
-`secuestros`
-    INNER JOIN `expedientes` 
+    expedientes.`autos` AS autos,
+    expedientes.`caratula` AS caratula,
+    expedientes.`fecha_origen` AS fecha_origen,
+    expedientes.`numero_origen` AS infraccion_numero,
+    secuestros.`descripcion` AS descripcion,
+    secuestros.`ubicacion` AS ubicacion,
+    secuestros.`objeto` AS objeto,
+    secuestros.`cantidad` AS cantidad,
+    secuestros.`accion` AS accion,
+    secuestros.`escrito` AS escrito,
+    secuestros.`id` AS secuestro_id
+    FROM
+    `secuestros`
+        INNER JOIN `expedientes` 
         ON (`secuestros`.`expediente` = `expedientes`.`id`)
          where secuestros.`id`=" . $secuestro_id;
 
@@ -111,20 +111,20 @@ FROM
     $data = [];
 
     $consulta = "SELECT
-expedientes.`autos` AS autos,
-expedientes.`caratula` AS caratula,
-expedientes.`fecha_origen` AS fecha_origen,
-expedientes.`numero_origen` AS infraccion_numero,
-secuestros.`descripcion` AS descripcion,
-secuestros.`ubicacion` AS ubicacion,
-secuestros.`objeto` AS objeto,
-secuestros.`cantidad` AS cantidad,
-secuestros.`accion` AS accion,
-secuestros.`escrito` AS escrito,
-secuestros.`id` AS sucuestro_id
-FROM
-`secuestros`
-    INNER JOIN `expedientes` 
+    expedientes.`autos` AS autos,
+    expedientes.`caratula` AS caratula,
+    expedientes.`fecha_origen` AS fecha_origen,
+    expedientes.`numero_origen` AS infraccion_numero,
+    secuestros.`descripcion` AS descripcion,
+    secuestros.`ubicacion` AS ubicacion,
+    secuestros.`objeto` AS objeto,
+    secuestros.`cantidad` AS cantidad,
+    secuestros.`accion` AS accion,
+    secuestros.`escrito` AS escrito,
+    secuestros.`id` AS sucuestro_id
+    FROM
+    `secuestros`
+        INNER JOIN `expedientes` 
         ON (`secuestros`.`expediente` = `expedientes`.`id`)
          where secuestros.`id`=$secuestro_id"; //AND expedientes.`autos`=142703; ";
     $rs = mysqli_query(conexion::obtenerInstancia(), $consulta);

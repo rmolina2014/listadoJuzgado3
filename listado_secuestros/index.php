@@ -3,6 +3,9 @@ require '../cabecera.php';
 require '../menu.php';
 include("../listado_secuestros/listado_secuestros.php");
 ?>
+<!--link href="https://cdn.datatables.net/v/bs4/dt-2.0.8/datatables.min.css" rel="stylesheet"-->
+<link rel="stylesheet" href="../js/DataTables/datatables.min.css" />
+
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -27,12 +30,14 @@ include("../listado_secuestros/listado_secuestros.php");
       <input type="hidden" id="caja_valor" name="caja_valor" id="caja_valor">
       <button type="submit" class="btn btn-primary" id="enviar"> Seleccionar Elementos </button>
     </form>
+
+    <button class= "btn btn-primary">Historial de Secuestros</button>
     </div>
     <br>
 
     <!--p> <a class="btn btn-primary" href="nuevo.php">Adicionar Nueva Nota </a> </p-->
     <!--button type="button" class="btn btn-primary" onclick="sendToPHP()">Seleccionar</button-->
-    <table id="listado" class="table table-striped table-bordered table-hover table-condensed">
+    <table id="listado" class="table table-bordered table-striped" style="width:100%">
       <thead>
         <tr>
           <th>Autos</th>
@@ -71,10 +76,28 @@ include("../listado_secuestros/listado_secuestros.php");
   </section>
   <!-- /.content -->
 </div>
+
 <!-- /.content-wrapper -->
 
-<script type="text/javascript">
+<!--link rel="stylesheet" href="/DataTables/datatables.css" /-->
+
+<!--script src="../plugins/datatables/jquery.dataTables.min.js"></script-->
+<script src="../js/DataTables/datatables.min.js"></script>
  
+<!--script src="https://cdn.datatables.net/v/bs4/dt-2.0.8/datatables.min.js"></script-->
+
+<script type="text/javascript">
+//let table = new DataTable('#listado');
+
+new DataTable('#listado')
+
+/*$(document).ready( function () {
+        $('#listado').Datatable({
+            //ajax: '/get_data.php'
+        });
+    } );
+*/
+
   let list = [];
 
   const boton=document.getElementById("enviar"); 
