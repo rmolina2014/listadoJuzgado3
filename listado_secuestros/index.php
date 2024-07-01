@@ -23,15 +23,18 @@ include("../listado_secuestros/listado_secuestros.php");
 
   <!-- Main content -->
   <section class="content">
-    <br>
-    <div id="formulario" >
-    
-    <form action="agregar_secuestros.php" method="POST">
-      <input type="hidden" id="caja_valor" name="caja_valor" id="caja_valor">
-      <button type="submit" class="btn btn-primary" id="enviar"> Seleccionar Elementos </button>
-    </form>
+    <div class="margin">
 
-    <button class= "btn btn-primary">Historial de Secuestros</button>
+      <div class="btn-group">
+        <form action="agregar_secuestros.php" method="POST">
+          <input type="hidden" id="caja_valor" name="caja_valor" id="caja_valor">
+          <button type="submit" class="btn btn-primary" id="enviar"> Seleccionar Elementos </button>
+        </form>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-primary">Historial de Secuestros</button>
+      </div>
+
     </div>
     <br>
 
@@ -69,8 +72,8 @@ include("../listado_secuestros/listado_secuestros.php");
             </tr>
           <?php
           }
-         ?>
-    
+          ?>
+
         </tbody>
     </table>
   </section>
@@ -79,43 +82,32 @@ include("../listado_secuestros/listado_secuestros.php");
 
 <!-- /.content-wrapper -->
 
-<!--link rel="stylesheet" href="/DataTables/datatables.css" /-->
-
-<!--script src="../plugins/datatables/jquery.dataTables.min.js"></script-->
 <script src="../js/DataTables/datatables.min.js"></script>
- 
-<!--script src="https://cdn.datatables.net/v/bs4/dt-2.0.8/datatables.min.js"></script-->
+<script src="../js/DataTables/es-ES.js"></script>
 
 <script type="text/javascript">
-//let table = new DataTable('#listado');
 
-new DataTable('#listado')
-
-/*$(document).ready( function () {
-        $('#listado').Datatable({
-            //ajax: '/get_data.php'
-        });
-    } );
-*/
+  new DataTable('#listado', {
+    "language": {
+      "url": "../js/DataTables/es-ES.json"
+    }
+  });
 
   let list = [];
 
-  const boton=document.getElementById("enviar"); 
+  const boton = document.getElementById("enviar");
   boton.disabled = true;
-
-  //$('#enviar').attr('disabled', false);
-   
 
   // funcion para habilitar o desabilitar un boton si la lista no esta vacia
   function habilitarBoton() {
-    
+
     if (list.length > 0) {
       boton.disabled = false;
     } else {
-      boton.disabled =true;
+      boton.disabled = true;
     }
   }
-   
+
   function addToList(value) {
     if (list.includes(value)) {
       list = list.filter(item => item !== value);
@@ -128,7 +120,6 @@ new DataTable('#listado')
     }
     console.log(list);
   }
-  
 </script>
 <?php
 require '../footer.html';

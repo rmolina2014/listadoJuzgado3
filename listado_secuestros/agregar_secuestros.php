@@ -13,7 +13,6 @@ $listado_elementos = $_POST['caja_valor'];
                     <h1>Listado de Secuestros</h1>
                 </div>
                 <div class="col-sm-6">
-
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -21,47 +20,59 @@ $listado_elementos = $_POST['caja_valor'];
 
     <!-- Main content -->
     <section class="content">
-        <h5>Elementos de Secuestros</h5>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12" style="padding: 15px;">
+                <h5>Elementos</h5>
                 <div id="tabla-datos"></div>
+
+                <div class="card ">
+                    <div class="card-header">
+                        <h3 class="card-title">Datos</h3>
+                    </div>
+
+
+                    <form action="imprimir_donacion.php" method="POST" target="_blank">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="nombre">Destinatario :</label>
+                                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="apellido">Proceder a :</label>
+                                        <select class="form-control" name="tipo_donacion" id="">
+                                            <option value="Donacion">Donacion</option>
+                                            <option value="Destrucción">Destrucción</option>
+                                            <option value="Restitución">Restitución</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md3">
+                                    <div class="form-group">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="button" class="btn btn-danger pull-left" data-dismiss="modal" onclick="location.href='index.php';"><i class="fa fa-times"></i> Cancelar</button>
+                                <input type="hidden" name="donacion" id="donacion">
+                                <!--input type="submit" class="btn btn-primary pull-right" value="Imprimir"-->
+                                <button type="submit" class="btn btn-primary pull-right"> <i class="fa fa-print"></i> Imprimir</button>
+                            </div>
+                    </form>
+                </div>
             </div>
+
         </div>
-
-        <div class="row">
-            <div class="col-md-3">
-                <form action="imprimir_donacion.php" method="POST" target="_blank">
-
-                    <label for="nombre">Nombre del destinatario:</label>
-                    <input type="text" id="nombre" name="nombre" required>
-                    <label for="apellido">tipo de secuestro donacion:</label>
-                    <select name="tipo_donacion" id="">
-                        <option value="Donacion">Donacion</option>
-                        <option value="Destrucción">Destrucción</option>
-                        <option value="Restitución">Restitución</option>
-                    </select>
-
-                    <input type="hidden" name="donacion" id="donacion">
-                    <input type="submit" class="btn btn-primary pull-right" value="Imprimir">
-                </form>
-
-            </div>
-
-            
-            <button type="button" class="btn btn-danger align-items-center" data-dismiss="modal" onclick="location.href='index.php';"><i class="fa fa-times"></i> Cancelar</button>
-
-                <!--button type="button" onclick="imprimirpdf();" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Guardar e Imprimir</button-->
-
-            </div>
-        </div>
-
-
+</div>
 </section>
+</div>
 
 <script type="text/javascript">
     var listaNumeros = <?php echo $listado_elementos; ?>;
     var lista = [];
-
     $.ajax({
         url: "json_lista_secuestros.php", // Cambiar por la URL de tu archivo PHP
         type: "POST",
@@ -113,7 +124,6 @@ $listado_elementos = $_POST['caja_valor'];
         html += '<tr><td colspan="7">Fin Listado </td></tr>';
         html += '</tbody>';
         html += '</table>';
-
         $("#tabla-datos").html(html);
     }
 
