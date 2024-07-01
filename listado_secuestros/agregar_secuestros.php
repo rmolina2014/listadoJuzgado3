@@ -37,13 +37,13 @@ $listado_elementos = $_POST['caja_valor'];
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="nombre">Destinatario :</label>
-                                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                        <input type="text" class="form-control" id="destinatario" name="destinatario" required>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="apellido">Proceder a :</label>
-                                        <select class="form-control" name="tipo_donacion" id="">
+                                        <select class="form-control" name="proceder" id="proceder">
                                             <option value="Donacion">Donacion</option>
                                             <option value="Destrucción">Destrucción</option>
                                             <option value="Restitución">Restitución</option>
