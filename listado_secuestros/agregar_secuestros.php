@@ -58,6 +58,8 @@ $listado_elementos = $_POST['caja_valor'];
                             <div class="card-footer">
                                 <button type="button" class="btn btn-danger pull-left" data-dismiss="modal" onclick="location.href='index.php';"><i class="fa fa-times"></i> Cancelar</button>
                                 <input type="hidden" name="donacion" id="donacion">
+                                <input type="hidden" name="acta_infraccion" id="acta_infraccion">
+                                <input type="hidden" name="autos" id="autos">
                                 <!--input type="submit" class="btn btn-primary pull-right" value="Imprimir"-->
                                 <button type="submit" class="btn btn-primary pull-right"> <i class="fa fa-print"></i> Imprimir</button>
                             </div>
@@ -96,6 +98,9 @@ $listado_elementos = $_POST['caja_valor'];
     });
 
     function generarTabla(datos) {
+
+        let actaInfraccion;
+        let autos;
         var html = "";
         html += '<table class="table table-striped">';
         html += '<thead>';
@@ -120,11 +125,15 @@ $listado_elementos = $_POST['caja_valor'];
             html += '<td>' + datos[i].ubicacion + '</td>';
             html += '<td><button type="button" class="btn btn-danger" onclick="eliminar(' + i + ');">Borrar</button> </td>';
             html += '</tr>';
+            actaInfraccion = datos[i].acta_infraccion;
+            autos = datos[i].autos;
         }
         html += '<tr><td colspan="7">Fin Listado </td></tr>';
         html += '</tbody>';
         html += '</table>';
         $("#tabla-datos").html(html);
+        document.getElementById("acta_infraccion").value = actaInfraccion;
+        document.getElementById("autos").value = autos;
     }
 
     function eliminar(i) {

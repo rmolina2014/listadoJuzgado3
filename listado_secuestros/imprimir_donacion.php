@@ -85,6 +85,11 @@ $destinatario = $_POST['destinatario']; //'SEÑOR ';
 
 $proceder = $_POST['proceder'];
 
+$acta_infraccion = $_POST['acta_infraccion'];
+
+$autos = $_POST['autos'];
+
+
 $pdf->writeHTML("Señor", true, false, true, false);
 
 //$pdf->writeHTML('<span></span>', true, false, true, false);
@@ -115,7 +120,7 @@ $pdf->setCellHeightRatio(2.5);
 
 //$pdf->writeHTML('<span></span>', true, false, true, false);
 
-$nota = '                                        Me dirigo a Ud.,con el fin de comunicarle se ha dictado la siguiente providencia:"San Juan,' . $dia . ': I) Oficiese a ' . $destinatario . ' para que proceda a la ' . $proceder . ' de los siguientes elementos secuestrados:';
+$nota = '                                        Me dirigo a Ud.,con el fin de comunicarle se ha dictado la siguiente providencia:"San Juan,' . $dia . ': I) Oficiese a ' . $destinatario . ' para que proceda a la ' . $proceder . ' de los siguientes elementos secuestrados en Acta de Infraccion'.$acta_infraccion.', Autos Nº '.$autos.' que se encuentran en la dependencia a su cargo, tales son :';
 
 $pdf->MultiCell(0, 0, " " . $nota . "\n", 0, 'J', 1, 2, '', '', true);
 
@@ -133,30 +138,30 @@ foreach ($list as $item2) {
         $acta_infraccion = $item['infraccion_numero'];
     }
 
-    $pdf->writeHTML('En Acta de Infracción N° : ' . $acta_infraccion . ' en  Autos N° ' . $autos . ' C/' . $caratula . ' elementos ' . $cantidad . ' ' . $objeto . '-' . $descripcion . '-', true, false, true, false);
+   // $pdf->writeHTML('En Acta de Infracción N° : ' . $acta_infraccion . ' en  Autos N° ' . $autos . ' C/' . $caratula . ' elementos ' . $cantidad . ' ' . $objeto . '-' . $descripcion . '-', true, false, true, false);
+
+    $pdf->writeHTML( $cantidad . ' ' . $objeto . '-' . $descripcion . '-', true, false, true, false);
 }
 
 $nota = '                                        II)Para llevar a cabo esta medida, deberá labrarse acta con noticia al Juzgado actuante".-';
 
 $pdf->MultiCell(0, 0, '' . $nota . "\n", 0, 'J', 1, 2, '', '', true);
 //$pdf->writeHTML('<span></span>', true, false, true, false);
+$pdf->writeHTML('<span></span>', true, false, true, false);
 
-//$pdf->writeHTML('<span></span>', true, false, true, false);
-
-
-$pdf->SetXY(10, 220);
+/*$pdf->SetXY(10, 220);
 $pdf->Image('../imagenes/sello_secretaria.jpg', '', '', 39, 40, '', '', 'T', false, 300, '', false, false, 1, false, false, false);
-
+*/
 
 
 $nota1 = '                                        Sin más,le saludo a Ud. atentamente.-';
 
 $pdf->MultiCell(0, 0, '' . $nota1 . "\n", 0, 'J', 1, 2, '', '', true);
 
-$pdf->Image("../imagenes/sello_secretaria.jpg", 20, 240, 39, 0, 'JPG');
+/*$pdf->Image("../imagenes/sello_secretaria.jpg", 20, 240, 39, 0, 'JPG');
 $pdf->Image("../imagenes/sello_juzgado.jpg", 85, 230, 33, 0, 'JPG');
 $pdf->Image("../imagenes/sello_juez.jpg", 95, 230, 39, 0, 'JPG');
-
+*/
 
 $pdf->writeHTML('<span></span>', true, false, true, false);
 
