@@ -144,4 +144,31 @@ FROM
     }
     return $data;
   }
+
+  // listado de secuestros historicos
+  public function registro_secuestro_historico()
+  {
+    $data = [];
+    $consulta = "SELECT
+  `id`,
+  `autos`,
+  `fecha`,
+  `acta`,
+  `caratula`,
+  `reparticion`,
+  `objeto`,
+  `destino`
+FROM `registro_secuestro_historico`";
+    $rs = mysqli_query(conexion::obtenerInstancia(), $consulta);
+    if ($rs) {
+      if (
+        mysqli_num_rows($rs) > 0
+      ) {
+        while ($fila = mysqli_fetch_assoc($rs)) {
+          $data[] = $fila;
+        }
+      }
+    }
+    return $data;
+  }
 }

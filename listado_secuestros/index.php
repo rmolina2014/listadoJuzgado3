@@ -31,7 +31,8 @@ include("../listado_secuestros/listado_secuestros.php");
         </form>
       </div>
       <div class="btn-group">
-        <button class="btn btn-primary">Historial de Secuestros</button>
+
+        <a href="historial.php" class="btn btn-primary">Historial de Secuestros</a>
       </div>
     </div>
     <br>
