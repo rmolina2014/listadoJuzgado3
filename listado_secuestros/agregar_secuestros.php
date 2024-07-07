@@ -29,8 +29,6 @@ $listado_elementos = $_POST['caja_valor'];
                     <div class="card-header">
                         <h3 class="card-title">Datos</h3>
                     </div>
-
-
                     <form action="imprimir_donacion.php" method="POST" target="_blank">
                         <div class="card-body">
                             <div class="row">
@@ -44,9 +42,9 @@ $listado_elementos = $_POST['caja_valor'];
                                     <div class="form-group">
                                         <label for="apellido">Proceder a :</label>
                                         <select class="form-control" name="proceder" id="proceder">
-                                            <option value="Donacion">Donacion</option>
-                                            <option value="Destrucción">Destrucción</option>
-                                            <option value="Restitución">Restitución</option>
+                                            <option value="Donacion">Donación</option>
+                                            <option value="Destruccion">Destrucción</option>
+                                            <option value="Restitucion">Restitución</option>
                                         </select>
                                     </div>
                                 </div>
@@ -60,13 +58,16 @@ $listado_elementos = $_POST['caja_valor'];
                                 <input type="hidden" name="donacion" id="donacion">
                                 <input type="hidden" name="acta_infraccion" id="acta_infraccion">
                                 <input type="hidden" name="autos" id="autos">
+                                <input type="hidden" name="apellido" id="apellido">
+                                <input type="hidden" name="nombre" id="nombre">
+                                <input type="hidden" name="dni" id="dni">
+                                <input type="hidden" name="domicilio" id="domicilio">
                                 <!--input type="submit" class="btn btn-primary pull-right" value="Imprimir"-->
                                 <button type="submit" class="btn btn-primary pull-right"> <i class="fa fa-print"></i> Imprimir</button>
                             </div>
                     </form>
                 </div>
             </div>
-
         </div>
 </div>
 </section>
@@ -127,6 +128,10 @@ $listado_elementos = $_POST['caja_valor'];
             html += '</tr>';
             actaInfraccion = datos[i].acta_infraccion;
             autos = datos[i].autos;
+            nombre = datos[i].nombre;
+            apellido = datos[i].apellido;
+            dni = datos[i].dni;
+            domicilio = datos[i].domicilio;
         }
         html += '<tr><td colspan="7">Fin Listado </td></tr>';
         html += '</tbody>';
@@ -134,6 +139,10 @@ $listado_elementos = $_POST['caja_valor'];
         $("#tabla-datos").html(html);
         document.getElementById("acta_infraccion").value = actaInfraccion;
         document.getElementById("autos").value = autos;
+        document.getElementById("nombre").value = nombre;
+        document.getElementById("apellido").value = apellido;
+        document.getElementById("dni").value = dni;
+        document.getElementById("domicilio").value = domicilio;
     }
 
     function eliminar(i) {

@@ -86,10 +86,17 @@ FROM
     secuestros.`cantidad` AS cantidad,
     secuestros.`accion` AS accion,
     secuestros.`escrito` AS escrito,
-    secuestros.`id` AS secuestro_id
-    FROM
-    `secuestros`
-        INNER JOIN `expedientes` 
+    secuestros.`id` AS secuestro_id,
+    personas.`apellido` AS apellido,
+    personas.`nombre` AS nombre,
+    personas.`numero_documento` AS dni,
+    personas.`domicilio` AS domicilio
+    FROM  `actuaciones`
+    INNER JOIN `expedientes` 
+        ON (`actuaciones`.`expediente` = `expedientes`.`id`)
+    INNER JOIN `personas` 
+        ON (`actuaciones`.`persona` = `personas`.`id`)
+    INNER JOIN `secuestros` 
         ON (`secuestros`.`expediente` = `expedientes`.`id`)
          where secuestros.`id`=" . $secuestro_id;
 

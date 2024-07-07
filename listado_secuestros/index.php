@@ -24,7 +24,6 @@ include("../listado_secuestros/listado_secuestros.php");
   <!-- Main content -->
   <section class="content">
     <div class="margin">
-
       <div class="btn-group">
         <form action="agregar_secuestros.php" method="POST">
           <input type="hidden" id="caja_valor" name="caja_valor" id="caja_valor">
@@ -34,7 +33,6 @@ include("../listado_secuestros/listado_secuestros.php");
       <div class="btn-group">
         <button class="btn btn-primary">Historial de Secuestros</button>
       </div>
-
     </div>
     <br>
 
@@ -86,7 +84,6 @@ include("../listado_secuestros/listado_secuestros.php");
 <script src="../js/DataTables/es-ES.js"></script>
 
 <script type="text/javascript">
-
   new DataTable('#listado', {
     "language": {
       "url": "../js/DataTables/es-ES.json"

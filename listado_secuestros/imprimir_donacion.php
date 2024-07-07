@@ -83,14 +83,13 @@ $pdf->writeHTML('<span></span>', true, false, true, false);
 
 $destinatario = $_POST['destinatario']; //'SEÑOR ';
 
-$proceder = $_POST['proceder'];
 
 $acta_infraccion = $_POST['acta_infraccion'];
 
 $autos = $_POST['autos'];
 
 
-$pdf->writeHTML("Señor", true, false, true, false);
+$pdf->writeHTML("Señor Jefe de", true, false, true, false);
 
 //$pdf->writeHTML('<span></span>', true, false, true, false);
 
@@ -104,6 +103,7 @@ $list = json_decode($_POST['donacion']);
 
 foreach ($list as $item) {
     $ubicacion = $item->ubicacion;
+    $caratula = $item->caratula;
 }
 
 /** obtener ubicacion */
@@ -118,12 +118,27 @@ $pdf->writeHTML('S.___________/___________D.', true, false, true, false);
 
 $pdf->setCellHeightRatio(2.5);
 
+$proceder = $_POST['proceder'];
+
+switch ($proceder) {
+    case 'Donacion':
+        $nota = '                                        Me dirigo a Ud.,con el fin de comunicarle se ha dictado la siguiente providencia: "San Juan, ' . $dia . ': I) Oficiese a ' . $destinatario . ' para que proceda a la Donación de los siguientes elementos secuestrados en Acta de Infraccion Nº ' . $acta_infraccion . ', Autos Nº ' . $autos . ' C/ ' . $caratula . ' que se encuentran en calidad de secuestro en los autos utsupra mencionados, tales son :';
+        break;
+    case 'Destruccion':
+        $nota = '                                        Me dirigo a Ud.,con el fin de comunicarle se ha dictado la siguiente providencia: "San Juan, ' . $dia . ': I) Oficiese a ' . $destinatario . ' para que proceda a la Destrucción de los siguientes elementos secuestrados en Acta de Infraccion Nº ' . $acta_infraccion . ', Autos Nº ' . $autos . ' C/ ' . $caratula . ' que se encuentran en calidad de secuestro en los autos utsupra mencionados, tales son :';
+        ' que se encuentran en calidad de secuestro en los autos utsupra mencionados, tales son :';
+        break;
+    case 'Restitucion':
+        $nombre_apellido = $_POST['nombre'] . '' . $_POST['apellido'];
+        $dni = $_POST['dni'];
+        $domicilio = $_POST['domicilio'];
+        $nota = '                                        Me dirigo a Ud.,con el fin de comunicarle se ha dictado la siguiente providencia: "San Juan, ' . $dia . ': I) Oficiese a ' . $destinatario . ' para que proceda a la Restitución, al SR/A.: ' . $nombre_apellido . ' DNI:' . $dni . ' domicilio: ' . $domicilio . ' de los siguientes elementos secuestrados en Acta de Infraccion Nº ' . $acta_infraccion . ', Autos Nº ' . $autos . ' c/ ' . $caratula . ' que se encuentran en calidad de secuestro en los autos utsupra mencionados, tales son :';
+        break;
+}
 //$pdf->writeHTML('<span></span>', true, false, true, false);
-
-$nota = '                                        Me dirigo a Ud.,con el fin de comunicarle se ha dictado la siguiente providencia:"San Juan,' . $dia . ': I) Oficiese a ' . $destinatario . ' para que proceda a la ' . $proceder . ' de los siguientes elementos secuestrados en Acta de Infraccion'.$acta_infraccion.', Autos Nº '.$autos.' que se encuentran en la dependencia a su cargo, tales son :';
-
+//$nota = '                                        Me dirigo a Ud.,con el fin de comunicarle se ha dictado la siguiente providencia: "San Juan,' . $dia . ': I) Oficiese a ' . $destinatario . ' para que proceda a la ' . $proceder . ' de los siguientes elementos secuestrados en Acta de Infraccion'.$acta_infraccion.', Autos Nº '.$autos.' que se encuentran en la dependencia a su cargo, tales son :';
 $pdf->MultiCell(0, 0, " " . $nota . "\n", 0, 'J', 1, 2, '', '', true);
-
+$pdf->writeHTML('<span></span>', true, false, true, false);
 foreach ($list as $item2) {
     $secuestro_id = $item2->secuestro_id;
     $objeto = new listado_secuestros();
@@ -138,21 +153,16 @@ foreach ($list as $item2) {
         $acta_infraccion = $item['infraccion_numero'];
     }
 
-   // $pdf->writeHTML('En Acta de Infracción N° : ' . $acta_infraccion . ' en  Autos N° ' . $autos . ' C/' . $caratula . ' elementos ' . $cantidad . ' ' . $objeto . '-' . $descripcion . '-', true, false, true, false);
+    // $pdf->writeHTML('En Acta de Infracción N° : ' . $acta_infraccion . ' en  Autos N° ' . $autos . ' C/' . $caratula . ' elementos ' . $cantidad . ' ' . $objeto . '-' . $descripcion . '-', true, false, true, false);
 
-    $pdf->writeHTML( $cantidad . ' ' . $objeto . '-' . $descripcion . '-', true, false, true, false);
+    $pdf->writeHTML($cantidad . ' ' . $objeto . '-' . $descripcion . '-', true, false, true, false);
 }
 
-$nota = '                                        II)Para llevar a cabo esta medida, deberá labrarse acta con noticia al Juzgado actuante".-';
+$nota = '                                        II)Para llevar a cabo esta medida, deberá labrarse acta con noticia al Juzgado actuante.- Fdo Dr.Enrique Mattar Juez de Faltas - Dra. Adriana Corral de Lobos - Secretaria Letrada.-"';
 
 $pdf->MultiCell(0, 0, '' . $nota . "\n", 0, 'J', 1, 2, '', '', true);
 //$pdf->writeHTML('<span></span>', true, false, true, false);
 $pdf->writeHTML('<span></span>', true, false, true, false);
-
-/*$pdf->SetXY(10, 220);
-$pdf->Image('../imagenes/sello_secretaria.jpg', '', '', 39, 40, '', '', 'T', false, 300, '', false, false, 1, false, false, false);
-*/
-
 
 $nota1 = '                                        Sin más,le saludo a Ud. atentamente.-';
 
