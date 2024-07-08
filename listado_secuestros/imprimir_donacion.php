@@ -129,7 +129,7 @@ switch ($proceder) {
         ' que se encuentran en calidad de secuestro en los autos utsupra mencionados, tales son :';
         break;
     case 'Restitucion':
-        $nombre_apellido = $_POST['nombre'] . '' . $_POST['apellido'];
+        $nombre_apellido = $_POST['nombre'] . ' ' . $_POST['apellido'];
         $dni = $_POST['dni'];
         $domicilio = $_POST['domicilio'];
         $nota = '                                        Me dirigo a Ud.,con el fin de comunicarle se ha dictado la siguiente providencia: "San Juan, ' . $dia . ': I) Oficiese a ' . $destinatario . ' para que proceda a la Restitución, al SR/A.: ' . $nombre_apellido . ' DNI:' . $dni . ' domicilio: ' . $domicilio . ' de los siguientes elementos secuestrados en Acta de Infraccion Nº ' . $acta_infraccion . ', Autos Nº ' . $autos . ' c/ ' . $caratula . ' que se encuentran en calidad de secuestro en los autos utsupra mencionados, tales son :';
@@ -138,7 +138,9 @@ switch ($proceder) {
 //$pdf->writeHTML('<span></span>', true, false, true, false);
 //$nota = '                                        Me dirigo a Ud.,con el fin de comunicarle se ha dictado la siguiente providencia: "San Juan,' . $dia . ': I) Oficiese a ' . $destinatario . ' para que proceda a la ' . $proceder . ' de los siguientes elementos secuestrados en Acta de Infraccion'.$acta_infraccion.', Autos Nº '.$autos.' que se encuentran en la dependencia a su cargo, tales son :';
 $pdf->MultiCell(0, 0, " " . $nota . "\n", 0, 'J', 1, 2, '', '', true);
+
 $pdf->writeHTML('<span></span>', true, false, true, false);
+
 foreach ($list as $item2) {
     $secuestro_id = $item2->secuestro_id;
     $objeto = new listado_secuestros();

@@ -23,7 +23,7 @@ include("../listado_secuestros/listado_secuestros.php");
     <!-- Main content -->
     <section class="content">
         <div class="margin">
-            <h4 class="text-center">Resistro de Secuestros</h4>
+            <h4 class="text-center">Registro de Secuestros</h4>
             <br>
             <!--p> <a class="btn btn-primary" href="nuevo.php">Adicionar Nueva Nota </a> </p-->
             <!--button type="button" class="btn btn-primary" onclick="sendToPHP()">Seleccionar</button-->
