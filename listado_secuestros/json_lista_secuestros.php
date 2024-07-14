@@ -25,6 +25,7 @@ foreach ($list as $item) {
             "nombre" => $item['nombre'],
             "dni" => $item['dni'],
             "domicilio" => $item['domicilio'],
+            "cantidad" => $item['cantidad'],
         );
         array_push($datos, $fila);
     }

@@ -16,6 +16,16 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`tercero2024` /*!40100 DEFAULT CHARACTER
 
 USE `tercero2024`;
 
+/*Table structure for table `registro_secuestro_detalle_objeto` */
+
+DROP TABLE IF EXISTS `registro_secuestro_detalle_objeto`;
+
+CREATE TABLE `registro_secuestro_detalle_objeto` (
+  `id` int(12) NOT NULL AUTO_INCREMENT,
+  `registro_secuestro_id` int(12) DEFAULT NULL,
+  `secuestro_id` int(12) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*Table structure for table `registro_secuestro_historico` */
 
 DROP TABLE IF EXISTS `registro_secuestro_historico`;
@@ -27,14 +37,9 @@ CREATE TABLE `registro_secuestro_historico` (
   `acta` int(12) DEFAULT NULL,
   `caratula` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `reparticion` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `objeto` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `destino` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'Donacion-Destruccion-Reparticion',
+  `donado_a` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'donado a una institucion',
+  `restituido_a` varchar(150) COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'restituido a una persona',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-/*Data for the table `registro_secuestro_historico` */
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

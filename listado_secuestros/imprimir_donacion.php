@@ -81,12 +81,17 @@ $pdf->writeHTML($encabezado, true, false, true, false, "R");
 
 $pdf->writeHTML('<span></span>', true, false, true, false);
 
-$destinatario = $_POST['destinatario']; //'SEÑOR ';
+/**datos post */
 
+$destinatario = $_POST['destinatario']; //'SEÑOR ';
 
 $acta_infraccion = $_POST['acta_infraccion'];
 
 $autos = $_POST['autos'];
+
+$proceder = $_POST['proceder'];
+
+$donado_a = $_POST['donar_a'];
 
 
 $pdf->writeHTML("Señor Jefe de", true, false, true, false);
@@ -95,16 +100,34 @@ $pdf->writeHTML("Señor Jefe de", true, false, true, false);
 
 /*** buscar los datos ***/
 
-$objeto = new listado_secuestros();
 
+$objeto = new listado_secuestros();
+/**datos del json */
 $list = json_decode($_POST['donacion']);
+/*
+echo '<pre>';
+print_r($list);
+echo '</pre>';
+exit;*/
 
 // recorrer el json
 
 foreach ($list as $item) {
     $ubicacion = $item->ubicacion;
     $caratula = $item->caratula;
+    $autos = $item->autos;
+    $acta = $item->acta_infraccion;
+    $secuestro_id = $item->secuestro_id;
+    $restituido_a = $item->apellido . '' . $item->nombre;
 }
+
+
+/** insertar datos del secuestro */
+$id_registro_historico = $objeto->insertar_registro_secuestro_historico($autos, $fecha, $acta, $caratula, $ubicacion, $proceder, $donado_a, $restituido_a);
+/*echo '<pre>' . $band . '</pre>';
+if($band>0) {echo "error"; exit;}
+
+exit;*/
 
 /** obtener ubicacion */
 
@@ -122,7 +145,7 @@ $proceder = $_POST['proceder'];
 
 switch ($proceder) {
     case 'Donacion':
-        $nota = '                                        Me dirigo a Ud.,con el fin de comunicarle se ha dictado la siguiente providencia: "San Juan, ' . $dia . ': I) Oficiese a ' . $destinatario . ' para que proceda a la Donación de los siguientes elementos secuestrados en Acta de Infraccion Nº ' . $acta_infraccion . ', Autos Nº ' . $autos . ' C/ ' . $caratula . ' que se encuentran en calidad de secuestro en los autos utsupra mencionados, tales son :';
+        $nota = '                                        Me dirigo a Ud.,con el fin de comunicarle se ha dictado la siguiente providencia: "San Juan, ' . $dia . ': I) Oficiese a ' . $destinatario . ' para que proceda a la Donación, a '.$donado_a.' de los siguientes elementos secuestrados en Acta de Infraccion Nº ' . $acta_infraccion . ', Autos Nº ' . $autos . ' C/ ' . $caratula . ' que se encuentran en calidad de secuestro en los autos utsupra mencionados, tales son :';
         break;
     case 'Destruccion':
         $nota = '                                        Me dirigo a Ud.,con el fin de comunicarle se ha dictado la siguiente providencia: "San Juan, ' . $dia . ': I) Oficiese a ' . $destinatario . ' para que proceda a la Destrucción de los siguientes elementos secuestrados en Acta de Infraccion Nº ' . $acta_infraccion . ', Autos Nº ' . $autos . ' C/ ' . $caratula . ' que se encuentran en calidad de secuestro en los autos utsupra mencionados, tales son :';
@@ -142,9 +165,9 @@ $pdf->MultiCell(0, 0, " " . $nota . "\n", 0, 'J', 1, 2, '', '', true);
 $pdf->writeHTML('<span></span>', true, false, true, false);
 
 foreach ($list as $item2) {
-    $secuestro_id = $item2->secuestro_id;
+    $secuestro_id1 = $item2->secuestro_id;
     $objeto = new listado_secuestros();
-    $datos = $objeto->obtenerDatosSecuestros2($secuestro_id);
+    $datos = $objeto->obtenerDatosSecuestros2($secuestro_id1);
     foreach ($datos as $item) {
         $autos = $item['autos'];
         $caratula = $item['caratula'];
@@ -153,6 +176,13 @@ foreach ($list as $item2) {
         $objeto = $item['objeto'];
         $cantidad = $item['cantidad'];
         $acta_infraccion = $item['infraccion_numero'];
+        $secuestro_id = $item['secuestro_id'];
+
+        // insertar detalle del secuestro
+        $objeto2 = new listado_secuestros();
+        $band = $objeto2->insertar_registro_secuestro_detalle_objeto($id_registro_historico, $secuestro_id);
+       // echo $band;
+        //exit;
     }
 
     // $pdf->writeHTML('En Acta de Infracción N° : ' . $acta_infraccion . ' en  Autos N° ' . $autos . ' C/' . $caratula . ' elementos ' . $cantidad . ' ' . $objeto . '-' . $descripcion . '-', true, false, true, false);
