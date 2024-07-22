@@ -121,12 +121,10 @@ foreach ($list as $item) {
     $restituido_a = $item->apellido . '' . $item->nombre;
 }
 
-
 /** insertar datos del secuestro */
 $id_registro_historico = $objeto->insertar_registro_secuestro_historico($autos, $fecha, $acta, $caratula, $ubicacion, $proceder, $donado_a, $restituido_a);
 /*echo '<pre>' . $band . '</pre>';
 if($band>0) {echo "error"; exit;}
-
 exit;*/
 
 /** obtener ubicacion */
@@ -160,9 +158,10 @@ switch ($proceder) {
 }
 //$pdf->writeHTML('<span></span>', true, false, true, false);
 //$nota = '                                        Me dirigo a Ud.,con el fin de comunicarle se ha dictado la siguiente providencia: "San Juan,' . $dia . ': I) Oficiese a ' . $destinatario . ' para que proceda a la ' . $proceder . ' de los siguientes elementos secuestrados en Acta de Infraccion'.$acta_infraccion.', Autos Nº '.$autos.' que se encuentran en la dependencia a su cargo, tales son :';
-$pdf->MultiCell(0, 0, " " . $nota . "\n", 0, 'J', 1, 2, '', '', true);
 
-$pdf->writeHTML('<span></span>', true, false, true, false);
+$pdf->MultiCell(0, 0, " " . $nota ."\n", 0, 'J', 1, 1, '', '', true);
+
+//$pdf->writeHTML('<span></span>', true, false, true, false);
 
 foreach ($list as $item2) {
     $secuestro_id1 = $item2->secuestro_id;
@@ -198,11 +197,12 @@ $pdf->writeHTML('<span></span>', true, false, true, false);
 
 $nota1 = '                                        Sin más,le saludo a Ud. atentamente.-';
 
-$pdf->MultiCell(0, 0, '' . $nota1 . "\n", 0, 'J', 1, 2, '', '', true);
+$pdf->MultiCell(0, 0, '' . $nota1 . "\n", 0, 'J', 1,1, '', '', true);
 
-/*$pdf->Image("../imagenes/sello_secretaria.jpg", 20, 240, 39, 0, 'JPG');
-$pdf->Image("../imagenes/sello_juzgado.jpg", 85, 230, 33, 0, 'JPG');
-$pdf->Image("../imagenes/sello_juez.jpg", 95, 230, 39, 0, 'JPG');
+/*
+$pdf->Image("../imagenes/sello_secretaria.jpg", 20, 230, 39, 0, 'JPG');
+$pdf->Image("../imagenes/sello_juzgado.jpg", 90, 200, 39, 0, 'JPG');
+$pdf->Image("../imagenes/sello_juez.jpg", 160, 230, 39, 0, 'JPG');
 */
 
 $pdf->writeHTML('<span></span>', true, false, true, false);
