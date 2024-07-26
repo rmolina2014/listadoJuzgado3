@@ -28,7 +28,7 @@ $listado_elementos = $_POST['caja_valor'];
                     <div class="card-header">
                         <h3 class="card-title">Datos</h3>
                     </div>
-                    <form action="imprimir_donacion.php" method="POST" target="_blank">
+                    <form action="imprimir.php" method="POST" target="_blank">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-3">
@@ -124,6 +124,9 @@ $listado_elementos = $_POST['caja_valor'];
         html += '<th>Objeto</th>';
         html += '<th>Descripción</th>';
         html += '<th>Ubicación</th>';
+        html += '<th>Persona</th>';
+        html += '<th>DNI</th>';
+        html += '<th>Domicilio</th>';
         html += '<th></th>';
         html += '</tr>';
         html += '</thead>';
@@ -136,6 +139,9 @@ $listado_elementos = $_POST['caja_valor'];
             html += '<td>' + datos[i].objeto + '</td>';
             html += '<td>' + datos[i].descripcion + '</td>';
             html += '<td>' + datos[i].ubicacion + '</td>';
+            html += '<td>' + datos[i].apellido + ' ' +datos[i].nombre + '</td>';
+            html += '<td>' + datos[i].dni + '</td>';
+            html += '<td>' + datos[i].domicilio + '</td>';
             html += '<td><button type="button" class="btn btn-danger" onclick="eliminar(' + i + ');">Borrar</button> </td>';
             html += '</tr>';
             actaInfraccion = datos[i].acta_infraccion;
@@ -145,7 +151,7 @@ $listado_elementos = $_POST['caja_valor'];
             dni = datos[i].dni;
             domicilio = datos[i].domicilio;
         }
-        html += '<tr><td colspan="7">Fin Listado </td></tr>';
+        html += '<tr><td colspan="10">Fin Listado </td></tr>';
         html += '</tbody>';
         html += '</table>';
         $("#tabla-datos").html(html);

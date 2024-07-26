@@ -10,7 +10,7 @@ class listado_secuestros
   {
     $data = [];
 
-    $consulta = "SELECT 
+    $consulta_antes = "SELECT 
   expedientes.`autos` AS autos,
 expedientes.`caratula` AS caratula,
   secuestros.`objeto` AS objeto,
@@ -27,6 +27,26 @@ FROM
     ) 
 WHERE armarios.nombre='K09' "; //AND expedientes.`autos`=142703; ";
 
+
+$consulta="SELECT
+expedientes.`autos` AS autos,
+expedientes.`caratula` AS caratula,
+  secuestros.`objeto` AS objeto,
+  secuestros.`cantidad` AS cantidad,
+  secuestros.`descripcion` AS descripcion,
+  secuestros.`ubicacion` AS ubicacion,
+  secuestros.`id` AS sucuestro_id
+FROM
+    `ubicaciones`
+    INNER JOIN `usuarios` 
+        ON (`ubicaciones`.`usuario` = `usuarios`.`id`)
+    INNER JOIN `expedientes` 
+        ON (`ubicaciones`.`expediente` = `expedientes`.`id`)
+    INNER JOIN `secuestros` 
+        ON (`secuestros`.`expediente` = `expedientes`.`id`)
+    INNER JOIN `armarios` 
+        ON (`ubicaciones`.`armario` = `armarios`.`id`)
+        WHERE armarios.nombre='K09' AND usuarios.`id`<>14";
 
     /* $consulta = "SELECT
 expedientes.`autos` AS autos,
@@ -98,7 +118,7 @@ FROM
         ON (`actuaciones`.`persona` = `personas`.`id`)
     INNER JOIN `secuestros` 
         ON (`secuestros`.`expediente` = `expedientes`.`id`)
-         where secuestros.`id`=" . $secuestro_id;
+         where secuestros.`id`=".$secuestro_id." AND  personas.`numero_documento`<> 0;";
 
     //AND expedientes.`autos`=142703; ";
     $rs = mysqli_query(conexion::obtenerInstancia(), $consulta);
@@ -244,8 +264,7 @@ VALUES (
     registro_secuestro_historico.`caratula` AS caratula_registro,
     registro_secuestro_historico.`reparticion` AS reparticion_registro,
     registro_secuestro_historico.`autos` AS autos_registro 
- 
-FROM
+ FROM
     `secuestros`
     INNER JOIN `expedientes` 
         ON (`secuestros`.`expediente` = `expedientes`.`id`)
@@ -256,7 +275,7 @@ FROM
     INNER JOIN `actuaciones` 
         ON (`actuaciones`.`expediente` = `expedientes`.`id`)
     INNER JOIN `personas` 
-        ON (`actuaciones`.`persona` = `personas`.`id`);";
+        ON (`actuaciones`.`persona` = `personas`.`id`) WHERE personas.`numero_documento`<> 0;";
     $rs = mysqli_query(conexion::obtenerInstancia(), $consulta);
     if ($rs) {
       if (
